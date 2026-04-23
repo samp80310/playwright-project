@@ -7,4 +7,5 @@ RUN npm install
 
 COPY . .
 
-CMD ["npx", "playwright", "test"]
+# Run tests with HTML report
+CMD ["npx", "playwright", "test", "--reporter=html"]

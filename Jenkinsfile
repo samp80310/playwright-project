@@ -11,7 +11,15 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                sh 'docker run playwright-tests'
+                sh '''
+                docker run -v $(pwd)/playwright-report:/app/playwright-report playwright-tests
+                '''
+            }
+        }
+
+        stage('Archive Report') {
+            steps {
+                archiveArtifacts artifacts: 'playwright-report/**', fingerprint: true
             }
         }
     }
